@@ -8,7 +8,7 @@ livres on  id_livre = id_livre_livres inner join
 étudiants on id_etudiant = id_etudiant_étudiants;
 
 # calling the view
-select * from empruntDetails;
+select * from empruntDetails order by date_empt;
 
 # 2. tirgger update book stock when a book is borrow and return
 #------------------------------------------------------------------

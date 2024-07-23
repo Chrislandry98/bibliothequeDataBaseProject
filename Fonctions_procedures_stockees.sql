@@ -1,8 +1,9 @@
+# procedure to add a borrow
+
 drop procedure if exists addEmprunt;
 delimiter |
 CREATE PROCEDURE addEmprunt (in livre_emprunte INT, etudiant_emprunteur INT)
 BEGIN
-    DECLARE emprunt int;
     INSERT INTO emprunts (date_empt,
         date_retour,
         retour,
@@ -12,6 +13,7 @@ BEGIN
 END |
 delimiter ;
 
+# function to verify the availability of a book
 drop function if exists isBook;
 delimiter |
 CREATE function isBook (id_livre_recherche int) 
