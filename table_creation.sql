@@ -1,5 +1,7 @@
 #Ma base de données : 
-
+CREATE DATABASE bibliotheque CHARACTER SET 'utf8';
+USE bibliotheque;
+	
 DROP TABLE IF EXISTS livres;
 CREATE TABLE livres(
         id_livre     int (50) not null,
