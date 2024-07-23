@@ -3,6 +3,7 @@
 # 1. database creation
 #-----------------------------------------------------------------------------------------
 
+drop database if exists bibliotheque;
 CREATE DATABASE bibliotheque CHARACTER SET 'utf8';
 USE bibliotheque;
 
@@ -215,6 +216,22 @@ begin
     where id_livre = new.id_livre_livres;
 end //
 delimiter ;
+
+#----------------------------------------------------------------------------------------
+# 5. various sql queries
+#----------------------------------------------------------------------------------------
+
+# requête pour trouver les étudiants ayant emprunter un certain livre
+SELECT e.id_etudiant, e.nom, e.prénom, e.date_naiss, e.email, e.tel, e.date_inscription FROM étudiants e JOIN emprunts em ON e.id_etudiant = em.id_etudiant_étudiants JOIN livres l ON em.id_livre_livres = l.id_livre WHERE l.id_livre = 3;
+
+# Requête pour lister les emprunts en cours d_un étudiant
+SELECT em.date_empt, em.date_retour, em.retour, l.titre, l.auteur FROM emprunts em JOIN livres l ON em.id_livre_livres = l.id_livre WHERE em.id_etudiant_étudiants = 3 AND em.retour = FALSE;
+
+# Requête pour compter le nombre total d_emprunts par livre
+SELECT l.id_livre, l.titre, l.auteur, COUNT(em.id_etudiant_étudiants && em.id_livre_livres) AS nombre_emprunts FROM livres l LEFT JOIN emprunts em ON l.id_livre = em.id_livre_livres GROUP BY l.id_livre, l.titre, l.auteur ORDER BY `l`.`id_livre` ASC;
+
+# requête pour lister les livre d_un certain genre
+SELECT * FROM livres WHERE id_genre_genres = 2;
 
 
 ALTER TABLE livres ADD CONSTRAINT FK_livres_id_genre_genres FOREIGN KEY (id_genre_genres) REFERENCES genres(id_genre);
