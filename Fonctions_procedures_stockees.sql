@@ -18,6 +18,7 @@ drop function if exists isBook;
 delimiter |
 CREATE function isBook (id_livre_recherche int) 
 returns boolean
+deterministic
 BEGIN
     DECLARE response boolean;
     DECLARE result int;
