@@ -7,7 +7,7 @@ CREATE TABLE livres(
         id_livre     int (50) not null,
         titre     Varchar (50) not null,
         auteur     Varchar (50) not null,
-        année_public     Date not null,
+        année_public     int not null,
         nbr_exemplaire     Int (25) not null,
         id_genre_genres     Int (25) not null,
         PRIMARY KEY (id_livre)

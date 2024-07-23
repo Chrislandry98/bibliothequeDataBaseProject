@@ -36,4 +36,3 @@ begin
     where id_livre = new.id_livre_livres;
 end //
 delimiter ;
-
