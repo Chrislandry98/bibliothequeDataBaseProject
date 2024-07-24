@@ -2,7 +2,7 @@
 #-----------------------------------------------------------------------------------------
 # 1. database creation
 #-----------------------------------------------------------------------------------------
-
+SELECT "***************CREATION DE LA BASE DE DONNEES*************************";
 drop database if exists bibliotheque;
 CREATE DATABASE bibliotheque CHARACTER SET 'utf8';
 USE bibliotheque;
@@ -10,7 +10,7 @@ USE bibliotheque;
 #-----------------------------------------------------------------------------------------
 # 2. tables creation
 #-----------------------------------------------------------------------------------------
-	
+SELECT "***************CREATION DES TABLES****************************\n";	
 DROP TABLE IF EXISTS livres;
 CREATE TABLE livres(
         id_livre     int (50) not null,
@@ -73,7 +73,7 @@ alter table emprunts
 #-----------------------------------------------------------------------------------------
 # 3. inserting data in tables
 #-----------------------------------------------------------------------------------------
-
+SELECT "******************INSERTION DES DONNEES DANS LES TABLES*******************\n";
 INSERT INTO genres(nom_genre)
 	VALUES("Fiction"),
 		("Christian"),
@@ -137,7 +137,7 @@ INSERT INTO emprunts(date_empt, date_retour, retour, id_livre_livres, id_etudian
 #-----------------------------------------------------------------------------------------
 # 4. procedure and function
 #-----------------------------------------------------------------------------------------
-
+SELECT "*****************CREATION PROCEDURE to add a borrow***********************\n";
 # procedure to add a borrow
 
 drop procedure if exists addEmprunt;
@@ -177,9 +177,11 @@ delimiter ;
 #-----------------------------------------------------------------------------------------
 # 5. view and trigger to update livres at borrow and return
 #-----------------------------------------------------------------------------------------
+SELECT "*********************VIEW AND TRIGGER*********************************\n";
 
 # 1. view to display emprunts details
 #------------------------------------------------------------------
+SELECT "*******View to display emprunts details***********\n";
 
 drop view if exists empruntDetails;
 create view empruntDetails as
@@ -190,8 +192,9 @@ livres on  id_livre = id_livre_livres inner join
 # calling the view
 select * from empruntDetails order by date_empt;
 
-# 2. tirgger update book stock when a book is borrow and return
+# 2. trigger update book stock when a book is borrow and return
 #------------------------------------------------------------------
+SELECT "**********Trigger update book stock**************\n";
 
 # a. when a book is borrowed
 drop trigger if exists reduceBook;
@@ -222,14 +225,19 @@ delimiter ;
 #----------------------------------------------------------------------------------------
 
 # requête pour trouver les étudiants ayant emprunter un certain livre
+SELECT "******requête pour trouver les étudiants ayant emprunter un certain livre*******\n";
 SELECT e.id_etudiant, e.nom, e.prénom, e.date_naiss, e.email, e.tel, e.date_inscription FROM étudiants e JOIN emprunts em ON e.id_etudiant = em.id_etudiant_étudiants JOIN livres l ON em.id_livre_livres = l.id_livre WHERE l.id_livre = 3;
+
 # Requête pour lister les emprunts en cours d_un étudiant
+SELECT "**********Requête pour lister les emprunts en cours d_un étudiant*************\n";
 SELECT em.date_empt, em.date_retour, em.retour, l.titre, l.auteur FROM emprunts em JOIN livres l ON em.id_livre_livres = l.id_livre WHERE em.id_etudiant_étudiants = 3 AND em.retour = FALSE;
 
 # Requête pour compter le nombre total d_emprunts par livre
+SELECT "***************Requête pour compter le nombre total d_emprunts par livre***********\n";
 SELECT l.id_livre, l.titre, l.auteur, COUNT(em.id_etudiant_étudiants && em.id_livre_livres) AS nombre_emprunts FROM livres l LEFT JOIN emprunts em ON l.id_livre = em.id_livre_livres GROUP BY l.id_livre, l.titre, l.auteur ORDER BY `l`.`id_livre` ASC;
 
 # requête pour lister les livre d_un certain genre
+SELECT "****************requête pour lister les livre d_un certain genre*****************\n";
 SELECT * FROM livres WHERE id_genre_genres = 2;
 
 
